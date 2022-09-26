@@ -1,20 +1,17 @@
+/* eslint-disable no-undef */
 const express = require("express");
-const cors = require("cors");
 const app = express();
-const db = require("./db/db.js");
-// middleware
+const cors = require("cors");
+const dotenv = require("dotenv");
+const todoRouter = require("./router/todo.router");
+dotenv.config();
+const port = process.env.PORT || 3000;
+
 app.use(cors());
 app.use(express.json());
 
-app.get("/", async (req, res) => {
-  await db.query("SELECT * FROM todo;", (err, data) => {
-    console.clear();
-    console.table(data.rows);
-    res.json(data.rows);
-    db.end();
-  });
-});
+app.use("/todo", todoRouter);
 
-app.listen(3000, () => {
+app.listen(port, () => {
   console.log("server is listening on http://localhost:3000");
 });
