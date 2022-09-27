@@ -6,7 +6,7 @@ const InputTodo = () => {
   };
 
   const onSubmitForm = async (e) => {
-    e.preventDefault();
+    // e.preventDefault();
     const body = { description };
     try {
       const response = await fetch("http://localhost:3000/todo", {
@@ -15,6 +15,7 @@ const InputTodo = () => {
         body: JSON.stringify(body),
       });
       console.log(response);
+      // setDescription("");
     } catch (error) {
       console.log(error.message);
     }
