@@ -32,7 +32,6 @@ const InputTodo = () => {
         />
         <button className="btn btn-success">Add</button>
       </form>
-      <h2>{description}</h2>
     </Fragment>
   );
 };
