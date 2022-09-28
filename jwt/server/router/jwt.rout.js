@@ -1,10 +1,12 @@
 const router = require("express").Router();
 const { registeration } = require("../controller/register.control");
+const { login } = require("../controller/login.control");
+const { isVerify } = require("../controller/verify");
+const Authorization = require("../middleware/authorization");
 
 // Add routes
 router.post("/register", registeration);
-// router.get('/', SessionController.store);
-// router.put('/', SessionController.store);
-// router.delete('/', SessionController.store);
+router.post("/login", login);
+router.get("/verify", Authorization, isVerify);
 
 module.exports = router;

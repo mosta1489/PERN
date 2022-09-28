@@ -1,6 +1,6 @@
 const { getOneUser, insertUser } = require("../model/auth.model");
 const { hashPassword } = require("../utils/bcrypt.hash");
-const { login } = require("./login.control");
+const { jwtGenerator } = require("../utils/jwt");
 const registeration = async (req, res) => {
   try {
     const { name, email, password } = req.body;
@@ -18,9 +18,9 @@ const registeration = async (req, res) => {
     const newUser = await insertUser({ name, email, hashedPahssword });
 
     // login user
-    const token = await login({ user_id: newUser.rows[0].user_id });
+    const token = await jwtGenerator(newUser.rows[0].user_id);
 
-    res.json({ newUser: newUser.rows[0], token });
+    res.json({ token });
     // res.json({ token });
 
     //
